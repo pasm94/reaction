@@ -1,0 +1,4 @@
+- utilizar [slug]
+- criar login oauth
+- banco de dados não relacional
+- static site generation
