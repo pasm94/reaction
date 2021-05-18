@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { List, ListRowRenderer } from 'react-virtualized';
 import Header from '../../components/Header';
-import Pokemon from '../../components/Pokemon/Pagination/pokemon';
+import Pokemon from '../../components/Pokemon/Performance/pokemon';
 
 type Pokemon = {
   name: string;

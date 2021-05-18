@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => (
-  <Flex w='100%' maxW={1480} mx='auto' bgColor={'pink.500'} p='7'>
+  <Flex w='100vw' mx='auto' bgColor={'pink.500'} p='7'>
     <Heading size='3xl'>
       <Text mb='5'>{title}</Text>
       <Text fontSize='2xl'>{subtitle}</Text>
