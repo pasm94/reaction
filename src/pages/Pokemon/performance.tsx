@@ -45,26 +45,14 @@ const Performance: React.FC = () => {
         subtitle={`Big list of pokémons. (${pokemons.length} items)`}
       />
       <Flex m='5'>
-        {theme === 'light' ? (
-          <List
-            height={300}
-            rowHeight={30}
-            width={600}
-            overscanRowCount={5}
-            rowCount={pokemons.length}
-            rowRenderer={rowRenderer}
-          />
-        ) : (
-          <List
-            style={{ color: 'gray.100' }}
-            height={300}
-            rowHeight={30}
-            width={600}
-            overscanRowCount={5}
-            rowCount={pokemons.length}
-            rowRenderer={rowRenderer}
-          />
-        )}
+        <List
+          height={300}
+          rowHeight={30}
+          width={600}
+          overscanRowCount={5}
+          rowCount={pokemons.length}
+          rowRenderer={rowRenderer}
+        />
 
         <Text
           ml='5'

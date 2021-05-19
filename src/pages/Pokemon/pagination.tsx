@@ -1,6 +1,4 @@
 import { Box, Flex, Text } from '@chakra-ui/layout';
-import axios from 'axios';
-import { useEffect } from 'react';
 import Header from '../../components/Header';
 import PokemonsList from '../../components/Pokemon/Pagination/pokemonsList';
 import { useLightDarkTheme } from '../../contexts/LightDarkThemeContext';

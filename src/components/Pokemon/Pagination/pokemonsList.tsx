@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/layout';
+import { Box, Flex, Text, Spinner } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
@@ -27,12 +27,12 @@ const PokemonsList: React.FC = () => {
         setPokemons(pokemonsList);
       });
   }, [pokemonsOffset]);
+
   return (
     <Box>
       <Flex align='center'>
         <Text
           fontSize='7xl'
-          mr='10'
           color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
           _hover={{
             cursor: pokemonsOffset >= 10 ? 'pointer' : 'no-drop',
@@ -52,6 +52,8 @@ const PokemonsList: React.FC = () => {
               fontSize='2xl'
               fontWeight='600'
               color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
+              ml='10'
+              mr='10'
             >
               {pokemon.name}
             </Text>
@@ -59,7 +61,6 @@ const PokemonsList: React.FC = () => {
         </Flex>
         <Text
           fontSize='7xl'
-          ml='10'
           color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
           _hover={{
             cursor: 'pointer',
