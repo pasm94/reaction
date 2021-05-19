@@ -1,14 +1,16 @@
-import { Button } from '@chakra-ui/button';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
+import { useLightDarkTheme } from '../../../contexts/LightDarkThemeContext';
 
 type Pokemon = {
   name: string;
 };
 
 const PokemonsList: React.FC = () => {
+  const { theme, changeTheme } = useLightDarkTheme();
+
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [pokemonsOffset, setPokemonsOffset] = useState(0);
 
@@ -31,7 +33,7 @@ const PokemonsList: React.FC = () => {
         <Text
           fontSize='7xl'
           mr='10'
-          color={'whiteAlpha.800'}
+          color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
           _hover={{
             cursor: pokemonsOffset >= 10 ? 'pointer' : 'no-drop',
             transition: '300ms',
@@ -45,7 +47,12 @@ const PokemonsList: React.FC = () => {
         </Text>
         <Flex flexDir='column'>
           {pokemons.map(pokemon => (
-            <Text fontSize='2xl' fontWeight='600' color={'whiteAlpha.800'}>
+            <Text
+              key={pokemon.name}
+              fontSize='2xl'
+              fontWeight='600'
+              color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
+            >
               {pokemon.name}
             </Text>
           ))}
@@ -53,7 +60,7 @@ const PokemonsList: React.FC = () => {
         <Text
           fontSize='7xl'
           ml='10'
-          color={'whiteAlpha.800'}
+          color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
           _hover={{
             cursor: 'pointer',
             transition: '300ms',

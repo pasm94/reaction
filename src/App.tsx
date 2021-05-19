@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { LightDarkThemeProvider } from './contexts/LightDarkThemeContext';
 import Routes from './routes';
 import { theme } from './styles/theme';
 
@@ -8,7 +9,9 @@ export function App() {
     <>
       <Router>
         <ChakraProvider theme={theme}>
-          <Routes />
+          <LightDarkThemeProvider>
+            <Routes />
+          </LightDarkThemeProvider>
         </ChakraProvider>
       </Router>
     </>

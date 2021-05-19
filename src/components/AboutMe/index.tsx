@@ -17,7 +17,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ title, subtitle }) => (
       alignItems='center'
     >
       <FiGithub />
-      <Text ml='5'>Github</Text>
+      <Text ml='5'>pasm94</Text>
     </Link>
     <Link
       fontSize='1.5rem'
@@ -28,7 +28,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ title, subtitle }) => (
       alignItems='center'
     >
       <FiLinkedin />
-      <Text ml='5'>Linkedin</Text>
+      <Text ml='5'>Paulo A. S. Müller</Text>
     </Link>
     <Text
       display='flex'
