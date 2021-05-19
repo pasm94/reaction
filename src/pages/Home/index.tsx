@@ -15,7 +15,7 @@ const Home: React.FC = () => {
         }
       />
       <Flex w='100%' align='center' maxW={1480} mx='auto'>
-        <Image m='5' w='80' src={pokemonImg} />
+        <Image m='5' h='12rem' src={pokemonImg} />
         <Flex flexDir='column'>
           <ChakraLink mb='8'>
             <Link to='/pokemon/pagination'>
