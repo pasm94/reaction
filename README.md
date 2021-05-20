@@ -17,7 +17,8 @@ Every application is separated by components. An example of this is the page hea
 
 #### Pagination
 We change the displayed data according to the user's request.
-![pagination](https://user-images.githubusercontent.com/57308117/118759197-f0aca580-b846-11eb-9449-3a9d54cb649b.gif)
+![pagination](https://user-images.githubusercontent.com/57308117/118915748-0207b780-b904-11eb-9475-445815183ca2.gif)
+
 
 #### Form and fake api
 A fake api with json-server used to save Users data and a form using state hooks.
