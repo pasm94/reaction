@@ -2,6 +2,7 @@ import { Image } from '@chakra-ui/image';
 import { Box, Flex, Text, Link as ChakraLink } from '@chakra-ui/layout';
 import { Link } from 'react-router-dom';
 import { FiChevronRight, FiMoon, FiSun } from 'react-icons/fi';
+import { FaWpforms } from 'react-icons/fa';
 import pokemonImg from './pokemon.svg';
 import Header from '../../components/Header';
 import { Button } from '@chakra-ui/button';
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
         h='100vh'
         backgroundColor={theme === 'light' ? 'whiteAlpha.900' : ''}
       >
-        <Flex pt='8' w='100%' alignItems='center' maxW={1480} mx='auto'>
+        <Flex pt='6' w='100%' alignItems='center' maxW={1480} mx='auto'>
           <Image m='5' h='12rem' src={pokemonImg} />
           <Flex flexDir='column'>
             <ChakraLink mb='8'>
@@ -86,6 +87,21 @@ const Home: React.FC = () => {
               pages.
             </Text>
           </Flex>
+        </Flex>
+        <Flex
+          w='100%'
+          alignItems='center'
+          maxW={1480}
+          pl='20'
+          mt='5'
+          fontSize='8xl'
+        >
+          <FaWpforms />
+          <Link to='/form'>
+            <Text fontSize='2xl' ml='5' display='flex' alignItems='center'>
+              <FiChevronRight /> Form using a fake api with json-server.
+            </Text>
+          </Link>
         </Flex>
       </Box>
     </Box>
