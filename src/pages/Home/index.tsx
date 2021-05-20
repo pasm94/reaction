@@ -95,11 +95,13 @@ const Home: React.FC = () => {
           pl='20'
           mt='5'
           fontSize='8xl'
+          color={theme === 'light' ? 'gray.900' : ''}
         >
           <FaWpforms />
           <Link to='/form'>
             <Text fontSize='2xl' ml='5' display='flex' alignItems='center'>
-              <FiChevronRight /> Form using a fake api with json-server.
+              <FiChevronRight />
+              Form using a fake api with json-server.
             </Text>
           </Link>
         </Flex>

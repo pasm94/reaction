@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Text, Spinner, Button } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
@@ -8,15 +8,25 @@ type Pokemon = {
   name: string;
 };
 
+function generatePagesArray(from: number, to: number) {
+  return [...new Array(to - from)]
+    .map((_, index) => {
+      return from + index + 1;
+    })
+    .filter(page => page > 0);
+}
+
 const PokemonsList: React.FC = () => {
-  const { theme, changeTheme } = useLightDarkTheme();
+  const { theme } = useLightDarkTheme();
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [pokemonsOffset, setPokemonsOffset] = useState(0);
+  const [pagesArray, setPagesArray] = useState<number[]>([]);
+  const [actualPage, setActualPage] = useState(1);
 
   useEffect(() => {
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon?limit=8&offset=${pokemonsOffset}`)
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=8&offset=${actualPage - 1}`)
       .then(response => {
         const pokemonsList = response.data.results.map((pokemon: Pokemon) => {
           return {
@@ -26,7 +36,24 @@ const PokemonsList: React.FC = () => {
 
         setPokemons(pokemonsList);
       });
-  }, [pokemonsOffset]);
+
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=8100000`)
+      .then(response => {
+        const pokes = response.data.results.map((pokemon: Pokemon) => {
+          return pokemon;
+        });
+
+        console.log(pokes.length);
+
+        const pagesArr = generatePagesArray(0, Math.ceil(pokes.length));
+        setPagesArray(pagesArr);
+      });
+  }, [pokemonsOffset, actualPage]);
+
+  function changePage(page: number) {
+    setActualPage(page);
+  }
 
   return (
     <Box>
@@ -40,7 +67,7 @@ const PokemonsList: React.FC = () => {
             color: 'pink.500',
           }}
           onClick={() => {
-            pokemonsOffset >= 10 && setPokemonsOffset(pokemonsOffset - 10);
+            actualPage > 1 && changePage(actualPage - 1);
           }}
         >
           <FiChevronLeft />
@@ -68,11 +95,74 @@ const PokemonsList: React.FC = () => {
             color: 'pink.500',
           }}
           onClick={() => {
-            setPokemonsOffset(pokemonsOffset + 10);
+            changePage(actualPage + 1);
           }}
         >
           <FiChevronRight />
         </Text>
+      </Flex>
+      <Flex ml='10' mt='5'>
+        {pagesArray.map(number => {
+          if (number <= 2 || number + 1 >= pagesArray.length) {
+            return (
+              <Button
+                mr='2'
+                ml='2'
+                w='2rem'
+                fontSize='small'
+                background='none'
+                _hover={{ background: 'none' }}
+                color={theme === 'light' ? 'gray.900' : ''}
+                border={theme === 'light' ? 'gray.900' : '1px solid white'}
+                onClick={() => changePage(number)}
+              >
+                {number}
+              </Button>
+            );
+          } else if (number + 1 >= actualPage && number < actualPage + 1) {
+            return (
+              <Button
+                mr='2'
+                ml='2'
+                w='2rem'
+                fontSize='small'
+                background='none'
+                _hover={{ background: 'none' }}
+                color={theme === 'light' ? 'gray.900' : ''}
+                border={theme === 'light' ? 'gray.900' : '1px solid white'}
+                onClick={() => changePage(number)}
+              >
+                {number}
+              </Button>
+            );
+          } else if (number >= actualPage && actualPage + 1 >= number) {
+            return (
+              <Button
+                mr='2'
+                ml='2'
+                w='2rem'
+                fontSize='small'
+                background='none'
+                _hover={{ background: 'none' }}
+                color={theme === 'light' ? 'gray.900' : ''}
+                border={theme === 'light' ? 'gray.900' : '1px solid white'}
+                onClick={() => changePage(number)}
+              >
+                {number}
+              </Button>
+            );
+          } else if (
+            number + 3 === pagesArray.length ||
+            (actualPage > 4 && number === 3) ||
+            (pagesArray.length < 2 + number && actualPage !== pagesArray.length)
+          ) {
+            return (
+              <Text fontWeight='bold' fontSize='3xl' mt='-3'>
+                ...
+              </Text>
+            );
+          }
+        })}
       </Flex>
     </Box>
   );

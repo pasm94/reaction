@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import { Button } from '@chakra-ui/button';
 import { api } from '../../services/api';
 import React, { FormEvent, useEffect, useState } from 'react';
+import { useLightDarkTheme } from '../../contexts/LightDarkThemeContext';
 
 interface User {
   name: string;
@@ -11,6 +12,8 @@ interface User {
 }
 
 const Form: React.FC = () => {
+  const { theme, changeTheme } = useLightDarkTheme();
+
   const [users, setUsers] = useState<User[]>([]);
   const [name, setName] = useState('');
   const [github, setGithub] = useState('');
@@ -47,7 +50,11 @@ const Form: React.FC = () => {
         title={'ReactJS form 📋'}
         subtitle={'Form with ReactJS and fake api.'}
       />
-      <Box display='flex'>
+      <Box
+        h='100vh'
+        display='flex'
+        backgroundColor={theme === 'light' ? 'whiteAlpha.900' : ''}
+      >
         <Box p='8' w='50rem'>
           <Flex flexDir='column'>
             {users.length > 0 ? (
@@ -57,6 +64,7 @@ const Form: React.FC = () => {
                   alignItems='center'
                   fontSize='4xl'
                   key={user.github}
+                  color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
                 >
                   <FiUser />
                   <Text ml='4' mr='6'>
@@ -86,6 +94,7 @@ const Form: React.FC = () => {
             borderRadius={8}
             flexDir='column'
             onSubmit={handleAddUser}
+            color={theme === 'dark' ? 'whiteAlpha.900' : 'gray.900'}
           >
             <Input
               name='name'
@@ -95,6 +104,7 @@ const Form: React.FC = () => {
               placeholder='Nome'
               mb='4'
               minLength={3}
+              backgroundColor={theme === 'dark' ? 'gray.900' : 'whiteAlpha.900'}
             />
 
             <Input
@@ -104,6 +114,7 @@ const Form: React.FC = () => {
               type='text'
               placeholder='Github'
               minLength={1}
+              backgroundColor={theme === 'dark' ? 'gray.900' : 'whiteAlpha.900'}
             />
 
             <Button type='submit' mt='6' colorScheme='pink' size='lg'>
