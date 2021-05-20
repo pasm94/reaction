@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Button, Link } from '@chakra-ui/react';
+import { Flex, Text, Link } from '@chakra-ui/react';
 import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 interface AboutMeProps {

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spinner, Button } from '@chakra-ui/react';
+import { Box, Flex, Text, Button } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
@@ -20,7 +20,6 @@ const PokemonsList: React.FC = () => {
   const { theme } = useLightDarkTheme();
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [pokemonsOffset, setPokemonsOffset] = useState(0);
   const [pagesArray, setPagesArray] = useState<number[]>([]);
   const [actualPage, setActualPage] = useState(1);
 
@@ -49,7 +48,7 @@ const PokemonsList: React.FC = () => {
         const pagesArr = generatePagesArray(0, Math.ceil(pokes.length));
         setPagesArray(pagesArr);
       });
-  }, [pokemonsOffset, actualPage]);
+  }, [actualPage]);
 
   function changePage(page: number) {
     setActualPage(page);
@@ -62,7 +61,7 @@ const PokemonsList: React.FC = () => {
           fontSize='7xl'
           color={theme === 'light' ? 'gray.900' : 'whiteAlpha.800'}
           _hover={{
-            cursor: pokemonsOffset >= 10 ? 'pointer' : 'no-drop',
+            cursor: actualPage >= 1 ? 'pointer' : 'no-drop',
             transition: '300ms',
             color: 'pink.500',
           }}
@@ -103,49 +102,24 @@ const PokemonsList: React.FC = () => {
       </Flex>
       <Flex ml='10' mt='5'>
         {pagesArray.map(number => {
-          if (number <= 2 || number + 1 >= pagesArray.length) {
+          if (
+            number <= 2 ||
+            number + 1 >= pagesArray.length ||
+            (number + 1 >= actualPage && number < actualPage + 1) ||
+            (number >= actualPage && actualPage + 1 >= number)
+          ) {
             return (
               <Button
                 mr='2'
                 ml='2'
                 w='2rem'
                 fontSize='small'
-                background='none'
+                background={number === actualPage ? 'pink.500' : 'none'}
                 _hover={{ background: 'none' }}
                 color={theme === 'light' ? 'gray.900' : ''}
-                border={theme === 'light' ? 'gray.900' : '1px solid white'}
-                onClick={() => changePage(number)}
-              >
-                {number}
-              </Button>
-            );
-          } else if (number + 1 >= actualPage && number < actualPage + 1) {
-            return (
-              <Button
-                mr='2'
-                ml='2'
-                w='2rem'
-                fontSize='small'
-                background='none'
-                _hover={{ background: 'none' }}
-                color={theme === 'light' ? 'gray.900' : ''}
-                border={theme === 'light' ? 'gray.900' : '1px solid white'}
-                onClick={() => changePage(number)}
-              >
-                {number}
-              </Button>
-            );
-          } else if (number >= actualPage && actualPage + 1 >= number) {
-            return (
-              <Button
-                mr='2'
-                ml='2'
-                w='2rem'
-                fontSize='small'
-                background='none'
-                _hover={{ background: 'none' }}
-                color={theme === 'light' ? 'gray.900' : ''}
-                border={theme === 'light' ? 'gray.900' : '1px solid white'}
+                border={
+                  theme === 'light' ? '1px solid black' : '1px solid white'
+                }
                 onClick={() => changePage(number)}
               >
                 {number}
@@ -157,11 +131,17 @@ const PokemonsList: React.FC = () => {
             (pagesArray.length < 2 + number && actualPage !== pagesArray.length)
           ) {
             return (
-              <Text fontWeight='bold' fontSize='3xl' mt='-3'>
+              <Text
+                fontWeight='bold'
+                color={theme === 'light' ? 'gray.900' : ''}
+                fontSize='3xl'
+                mt='-3'
+              >
                 ...
               </Text>
             );
           }
+          return <></>;
         })}
       </Flex>
     </Box>

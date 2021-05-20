@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Button, Box } from '@chakra-ui/react';
+import { Flex, Heading, Text, Box } from '@chakra-ui/react';
 import AboutMe from '../AboutMe';
 
 interface HeaderProps {

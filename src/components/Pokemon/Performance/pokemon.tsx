@@ -1,6 +1,4 @@
 import { Box, Text } from '@chakra-ui/layout';
-import axios from 'axios';
-import { useEffect } from 'react';
 import { useLightDarkTheme } from '../../../contexts/LightDarkThemeContext';
 
 interface PokemonProps {
@@ -8,7 +6,7 @@ interface PokemonProps {
 }
 
 const Pokemon: React.FC<PokemonProps> = ({ pokemonName }) => {
-  const { theme, changeTheme } = useLightDarkTheme();
+  const { theme } = useLightDarkTheme();
 
   return (
     <Box>

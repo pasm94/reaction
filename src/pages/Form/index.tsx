@@ -12,7 +12,7 @@ interface User {
 }
 
 const Form: React.FC = () => {
-  const { theme, changeTheme } = useLightDarkTheme();
+  const { theme } = useLightDarkTheme();
 
   const [users, setUsers] = useState<User[]>([]);
   const [name, setName] = useState('');
