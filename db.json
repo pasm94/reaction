@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Paulo A. S. Müller",
+      "github": "github.com/pasm94"
+    },
+    {
+      "id": 2,
+      "name": "Facebook",
+      "github": "github.com/facebook"
+    },
+    {
+      "name": "Node.js",
+      "github": "github.com/nodejs",
+      "id": 3
+    }
+  ]
+}
