@@ -15,7 +15,10 @@ When changing the theme, this change will remain on the other pages.
 #### Components
 Every application is separated by components. An example of this is the page header.
 
-#### Pagination!
-
+#### Pagination
 We change the displayed data according to the user's request.
 ![pagination](https://user-images.githubusercontent.com/57308117/118759197-f0aca580-b846-11eb-9449-3a9d54cb649b.gif)
+
+#### Form and fake api
+A fake api with json-server used to save Users data and a form using state hooks.
+![form](https://user-images.githubusercontent.com/57308117/118905126-86047400-b8f1-11eb-8376-cc413ccda0c0.gif)
